@@ -121,6 +121,15 @@ def test_bb_addition_right_type_None():
     with pytest.raises(TypeError):
         subprocess.run(['python', 'main.py', '1', '+', None], check=True)
 
+def test_bb_addition_too_many_args():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '+', '1', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "ValueError" in result.stderr
+
 #TEST SUBTRACTION
 def test_bb_subtraction():
     result = subprocess.run(['python', 'main.py', '3', '-', '2'], stdout=subprocess.PIPE)
@@ -233,6 +242,15 @@ def test_bb_subtraction_left_type_None():
 def test_bb_subtraction_right_type_None():
     with pytest.raises(TypeError):
         subprocess.run(['python', 'main.py', '1', '-', None], check=True)
+
+def test_bb_subtraction_too_many_args():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '-', '1', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "ValueError" in result.stderr
 
 #TEST MULTIPLICATION
 def test_bb_multiplication():
@@ -350,6 +368,15 @@ def test_bb_multiplication_left_type_None():
 def test_bb_multiplication_right_type_None():
     with pytest.raises(TypeError):
         subprocess.run(['python', 'main.py', '1', 'x', None], check=True)
+
+def test_bb_multiplication_too_many_args():
+    result = subprocess.run(
+        ['python', 'main.py', '1', 'x', '1', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "ValueError" in result.stderr
 
 #TEST DIVISION
 def test_bb_division():
@@ -502,6 +529,15 @@ def test_bb_division_left_type_None():
 def test_bb_division_right_type_None():
     with pytest.raises(TypeError):
         subprocess.run(['python', 'main.py', '1', '/', None], check=True)
+
+def test_bb_division_too_many_args():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '/', '1', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "ValueError" in result.stderr
 
 #TEST OPERATION (OP) Validations
 def test_bb_op_type_list():

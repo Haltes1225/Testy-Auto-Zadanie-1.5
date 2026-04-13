@@ -71,6 +71,11 @@ def test_wb_addition_no_args():
     with pytest.raises(TypeError):
         calc.add()
 
+def test_wb_addition_too_many_args():
+    calc = Calculator()
+    with pytest.raises(TypeError):
+        calc.add(1,2,3)
+
 #TEST SUBTRACTION
 def test_wb_subtraction():
     calc = Calculator()
@@ -120,6 +125,11 @@ def test_wb_subtraction_no_args():
     calc = Calculator()
     with pytest.raises(TypeError):
         calc.sub()
+
+def test_wb_subtraction_too_many_args():
+    calc = Calculator()
+    with pytest.raises(TypeError):
+        calc.sub(1,2,3)
 
 #TEST MULTIPLICATION
 def test_wb_multiplication():
@@ -198,6 +208,11 @@ def test_wb_multiplication_no_args():
     with pytest.raises(TypeError):
         calc.mul()
 
+def test_wb_multiplication_too_many_args():
+    calc = Calculator()
+    with pytest.raises(TypeError):
+        calc.mul(1,2,3)
+
 #TEST DIVISION
 def test_wb_division():
     calc = Calculator()
@@ -262,6 +277,11 @@ def test_wb_division_no_args():
     calc = Calculator()
     with pytest.raises(TypeError):
         calc.div()
+
+def test_wb_division_too_many_args():
+    calc = Calculator()
+    with pytest.raises(TypeError):
+        calc.div(1,2,3)
 
 def test_wb_zero_division():
     calc = Calculator()
