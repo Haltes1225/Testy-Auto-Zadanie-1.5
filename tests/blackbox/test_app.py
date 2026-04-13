@@ -208,6 +208,29 @@ def test_bb_right_type_list():
     assert "TypeError" in result.stderr
 #I think main() should validate the types of input and raise TypeError instead of ValueError
 
+def test_bb_left_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1.2', '+', '1'],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+
+def test_bb_right_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1', 'x', '1.2'],
+        capture_output=True,
+        text=True
+    )
+    
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
 def test_bb_left_empty():
     result = subprocess.run(
         ['python', 'main.py', '', '/', '1'],
