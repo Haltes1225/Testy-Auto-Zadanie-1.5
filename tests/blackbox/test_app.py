@@ -146,6 +146,94 @@ def test_bb_subtraction_same():
     result = subprocess.run(['python', 'main.py', '-3', '-', '-3'], stdout=subprocess.PIPE)
     assert result.stdout.decode('utf-8') == '0\r\n'
 
+def test_bb_subtraction_left_type_string():
+    result = subprocess.run(
+        ['python', 'main.py', 'abcd', '-', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_subtraction_right_type_string():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '-', 'abcdef'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_subtraction_left_type_list():
+    result = subprocess.run(
+        ['python', 'main.py', '[1,2,3]', '-', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_subtraction_right_type_list():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '-', '[1,2,3]'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_subtraction_left_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1.2', '-', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_subtraction_right_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '-', '1.2'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_subtraction_left_empty():
+    result = subprocess.run(
+        ['python', 'main.py', '', '-', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError ('' is a str, not int)
+
+def test_bb_subtraction_right_empty():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '-', ''],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError ('' is a str, not int)
+
+def test_bb_subtraction_left_type_None():
+    with pytest.raises(TypeError):
+        subprocess.run(['python', 'main.py', None, '-', 'abcdef'], check=True)
+
+def test_bb_subtraction_right_type_None():
+    with pytest.raises(TypeError):
+        subprocess.run(['python', 'main.py', '1', '-', None], check=True)
+
 #TEST MULTIPLICATION
 def test_bb_multiplication():
     result = subprocess.run(['python', 'main.py', '3', 'x', '2'], stdout=subprocess.PIPE)
@@ -174,6 +262,94 @@ def test_bb_multiplication_one():
 def test_bb_multiplication_double_negative():
     result = subprocess.run(['python', 'main.py', '-3', 'x', '-3'], stdout=subprocess.PIPE)
     assert result.stdout.decode('utf-8') == '9\r\n'
+
+def test_bb_multiplication_left_type_string():
+    result = subprocess.run(
+        ['python', 'main.py', 'abcd', 'x', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_multiplication_right_type_string():
+    result = subprocess.run(
+        ['python', 'main.py', '1', 'x', 'abcdef'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_multiplication_left_type_list():
+    result = subprocess.run(
+        ['python', 'main.py', '[1,2,3]', 'x', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_multiplication_right_type_list():
+    result = subprocess.run(
+        ['python', 'main.py', '1', 'x', '[1,2,3]'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_multiplication_left_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1.2', 'x', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_multiplication_right_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1', 'x', '1.2'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_multiplication_left_empty():
+    result = subprocess.run(
+        ['python', 'main.py', '', 'x', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError ('' is a str, not int)
+
+def test_bb_multiplication_right_empty():
+    result = subprocess.run(
+        ['python', 'main.py', '1', 'x', ''],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError ('' is a str, not int)
+
+def test_bb_multiplication_left_type_None():
+    with pytest.raises(TypeError):
+        subprocess.run(['python', 'main.py', None, 'x', 'abcdef'], check=True)
+
+def test_bb_multiplication_right_type_None():
+    with pytest.raises(TypeError):
+        subprocess.run(['python', 'main.py', '1', 'x', None], check=True)
 
 #TEST DIVISION
 def test_bb_division():
@@ -239,6 +415,93 @@ def test_bb_division_double_zero():
     assert result.returncode != 0
     assert "ZeroDivisionError" in result.stderr
 
+def test_bb_division_left_type_string():
+    result = subprocess.run(
+        ['python', 'main.py', 'abcd', '/', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_division_right_type_string():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '/', 'abcdef'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_division_left_type_list():
+    result = subprocess.run(
+        ['python', 'main.py', '[1,2,3]', '/', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_division_right_type_list():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '/', '[1,2,3]'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_division_left_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1.2', '/', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_division_right_type_float():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '/', '1.2'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError
+
+def test_bb_division_left_empty():
+    result = subprocess.run(
+        ['python', 'main.py', '', '/', '1'],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError ('' is a str, not int)
+
+def test_bb_division_right_empty():
+    result = subprocess.run(
+        ['python', 'main.py', '1', '/', ''],
+        capture_output=True,
+        text=True
+    )
+    assert result.returncode != 0
+    assert "TypeError" in result.stderr
+#I think main() should validate the types of input and raise TypeError instead of ValueError ('' is a str, not int)
+
+def test_bb_division_left_type_None():
+    with pytest.raises(TypeError):
+        subprocess.run(['python', 'main.py', None, '/', 'abcdef'], check=True)
+
+def test_bb_division_right_type_None():
+    with pytest.raises(TypeError):
+        subprocess.run(['python', 'main.py', '1', '/', None], check=True)
 
 #TEST OPERATION (OP) Validations
 def test_bb_op_type_list():
