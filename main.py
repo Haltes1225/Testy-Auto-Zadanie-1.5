@@ -15,13 +15,3 @@ if __name__ == '__main__':
     args = sys.argv[1:]
     main(*args)
 
-
-# $ python main.py 1 / 1  results in
-# File "...\Testy Auto Zadanie 1_5\main.py", line 7, in main
-#    print({
-#          ~
-#    ...<3 lines>...
-#        '/': calc.div,
-#        ~~~~~~~~~~~~~~
-#    }[op](int(left), int(right)))
-
